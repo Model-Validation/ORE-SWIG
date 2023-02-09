@@ -223,3 +223,6 @@ CMakeFiles
 oreanalytics
 OREAnalyticsJava.dir
 builddir/
+OREData-SWIG/Python/vc140.idb
+OREData-SWIG/Python/OREData/oredata_wrap.cpp
+OREData-SWIG/Python/OREData/__init__.py

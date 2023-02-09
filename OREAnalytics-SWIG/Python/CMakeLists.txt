@@ -23,12 +23,11 @@ get_library_name("OREAnalytics" OREA_LIB_NAME)
 get_library_name("OREData" ORED_LIB_NAME)
 get_library_name("QuantExt" QLE_LIB_NAME)
 get_library_name("QuantLib" QL_LIB_NAME)
-configure_msvc_runtime()
 
 # To build the module, we moreover need Boost, Swig, Python
 find_package(Boost COMPONENTS serialization date_time regex filesystem system timer thread REQUIRED)
 find_package(SWIG REQUIRED)
-find_package(PythonLibs)
+find_package(PythonLibs 3.7.6 EXACT)
 
 # What does this mean?
 include(${SWIG_USE_FILE})
