@@ -228,3 +228,6 @@ ipch/
 
 *log.txt
 *.dat
+OREAnalytics-SWIG/Python/Examples/**
+OREAnalytics-SWIG/Python/ORE/ORE.py
+OREAnalytics-SWIG/Python/ORE/oreanalytics_wrap.cpp
