@@ -28,6 +28,7 @@
 
 %{
 using QuantExt::CrossCcySwap;
+using QuantExt::CurrencySwap;
 %}
 
 %shared_ptr(CrossCcySwap)
@@ -41,6 +42,40 @@ class CrossCcySwap : public Swap {
                  const std::vector<bool>& payer,
                  const std::vector<QuantLib::Currency>& currencies);
 };
+
+// %inline %{
+//     ext::shared_ptr<CrossCcySwap> as_cross_currency_swap(
+//                                       const ext::shared_ptr<Instrument>& inst) {
+//                                         std::cout << typeid(inst).name() << std::endl;
+//         return ext::dynamic_pointer_cast<CrossCcySwap>(inst);
+//     }
+// %}
+
+// %inline %{
+//     ext::shared_ptr<CrossCcySwap> as_cross_currency_swap(
+//       const ext::shared_ptr<Instrument>& inst) {
+//         std::cout << typeid(*inst).name() << std::endl;
+//         // std::cout << decltype(*inst) << std::endl;
+//         auto xccys = ext::dynamic_pointer_cast<CrossCcySwap>(inst);
+//         std::cout << typeid(*xccys).name() << std::endl;
+//         // std::cout << decltype(*xccys) << std::endl;
+ 
+//         // std::cout << inst.static_type << std::endl;
+//         // std::cout << inst.dynamic_type << std::endl;
+//         // std::cout << xccys.static_type << std::endl;
+//         // std::cout << xccys.dynamic_type << std::endl;
+//         return xccys;
+//     }
+// %}
+
+%inline %{
+    CrossCcySwap as_cross_ccy_swap(
+      const ext::shared_ptr<Instrument>& inst) {
+        auto xccys = ext::dynamic_pointer_cast<CurrencySwap>(inst);
+        return CrossCcySwap(xccys->legs(), xccys->payers(), xccys->currencies());
+    }
+%}
+
 
 %{
 using QuantExt::CrossCcySwapEngine;
